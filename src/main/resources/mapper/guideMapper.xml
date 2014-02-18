@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GuideDao">
+	<select id="selectAllGuides" resultType="map">
+		SELECT * FROM guide;
+	</select>
+
+		<select id="selectGuideByIdx" resultType="map" parameterType="String">
+		SELECT * FROM guide WHERE idx = #{idx};
+	</select>
+	
+	<select id="selectGuideOfCondition" resultType="map" parameterType="org.secsm.model.Guide">
+		SELECT * FROM guide WHERE os = #{os} AND res = #{res};
+	</select>
+
+	<select id="insertGuide" parameterType="org.secsm.model.Guide">
+		INSERT INTO guide(creator, date, gidx, name, image, res, os, description, download )
+									VALUES ( #{creator} , #{date}, #{gidx}, #{name}, #{image}, #{res}, #{os}, #{description}, '0');
+	</select>
+	
+	<select id="updateGuide" parameterType="org.secsm.model.Guide">
+		UPDATE guide SET name = #{name}, image = #{image}, description = #{description} WHERE idx = #{idx};
+	</select>
+
+	<select id="deleteGuide" parameterType="String">
+		DELETE FROM guide WHERE idx = #{idx};
+	</select>
+</mapper>

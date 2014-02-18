@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RequestDao">
+	<select id="insertRequset" parameterType="org.secsm.model.Request">
+		INSERT INTO request(user_id, title, body, accept, gidx)
+									VALUES ( #{user_id}, #{title}, #{body}, #{accept}, #{gidx});
+	</select>
+	
+	<select id="getRequest" resultType="map">
+		SELECT * FROM request;
+	</select>
+	
+	<select id="getRequestById" parameterType="String" resultType="map">
+		SELECT * FROM request WHERE user_id = #{user_id};
+	</select>
+				
+	<select id="updateRequest" parameterType="org.secsm.model.Request">
+		UPDATE request SET title = #{title}, body = #{body} WHERE rid = #{rid};
+	</select>
+
+	<select id="deleteRequest" parameterType="int">
+		DELETE FROM request WHERE rid = #{rid};
+	</select>
+
+</mapper>

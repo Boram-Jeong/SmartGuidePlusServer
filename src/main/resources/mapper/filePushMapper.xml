@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FilePushDao">
+	<select id="selectPushById" parameterType="String" resultType="map">
+		SELECT * FROM filepush WHERE sender = #{user_id};
+	</select>
+
+	<select id="insertFilePush" parameterType="org.secsm.model.FilePush">
+		INSERT INTO filepush(sender, receiver, gidx, time)
+									VALUES ( #{sender}, #{receiver}, #{gidx}, #{time});
+	</select>
+</mapper>
