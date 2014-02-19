@@ -28,7 +28,8 @@
 	</bean>
 	<bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
 		<constructor-arg>
-			<value>C:\Users\JEONGBORAM-PC-W1\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\SmartGuidePlusServer\resources\</value>
+			<!-- <value>C:\Users\JEONGBORAM-PC-W1\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\SmartGuidePlusServer\resources\</value> -->
+			<value>C:\upload\</value>
 		</constructor-arg>
 	</bean>
 	

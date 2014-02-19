@@ -61,6 +61,7 @@ public class MainController {
 	
 	@RequestMapping(value="/user", method=RequestMethod.PUT)
 	public void editUser(User user) {
+		System.out.println("test");
 		userDao.updateUser(user);
 	}
 
@@ -181,14 +182,14 @@ public class MainController {
 		Sender sender = new Sender(API);
 		String ENC = "UTF-8";
 
-		String message = "test";
 
 		try {
-			message = URLEncoder.encode(message, ENC);
 			Message.Builder messageBuilder = new Message.Builder();
 			messageBuilder.addData("title", "재환이 바보");
+			String message = "test";
 			messageBuilder.addData("msg", message);
-
+			message = URLEncoder.encode(message, ENC);
+			
 			com.google.android.gcm.server.Result result = sender.send(messageBuilder.build(), regitId, 5);
 			String messageId = result.getMessageId();
 

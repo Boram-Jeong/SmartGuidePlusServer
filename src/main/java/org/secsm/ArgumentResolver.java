@@ -7,6 +7,8 @@
 
 package org.secsm;
 
+import java.util.Map;
+
 import org.secsm.model.FilePush;
 import org.secsm.model.Guide;
 import org.secsm.model.Request;
@@ -31,9 +33,11 @@ public class ArgumentResolver implements WebArgumentResolver {
 			user.setName(request.getParameter("name"));
 			user.setPhone(request.getParameter("phone"));
 			user.setRegitid(request.getParameter("regitid"));
-
-			System.out.println(request.toString());
-			System.out.println(">>" + user.toString());
+			
+			Map<String,String[]> map =  request.getParameterMap();
+			System.out.println(map.containsKey("name")+"");
+			
+			System.out.println(">>" + user.toString()+request.getParameter("name"));
 			
 			return user;
 		} else if (methodParam.getParameterName().equals("guide")) {
