@@ -215,10 +215,9 @@ public class MainController {
 
 		try {
 			Message.Builder messageBuilder = new Message.Builder();
-			messageBuilder.addData("title", "재환이 바보");
-			String message = "test";
-			messageBuilder.addData("msg", message);
-			message = URLEncoder.encode(message, ENC);
+			String sender_name = user.getName();
+			messageBuilder.addData("sender", sender_name);
+			sender_name = URLEncoder.encode(sender_name, ENC);
 			
 			com.google.android.gcm.server.Result result = sender.send(messageBuilder.build(), regitId, 5);
 			String messageId = result.getMessageId();
