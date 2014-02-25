@@ -1,15 +1,23 @@
 package org.secsm.model;
 
 public class User {
-	int user_id;
+	int uidx;
+	String user_id;
 	String name;
 	String phone;
 	String regitid;
 	
-	public int getUser_id() {
+
+	public int getUidx() {
+		return uidx;
+	}
+	public void setUidx(int uidx) {
+		this.uidx = uidx;
+	}
+	public String getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
 	public String getName() {
@@ -33,7 +41,8 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", name=" + name + ", phone="
-				+ phone + ", regitid=" + regitid + "]";
+		return "User [uidx=" + uidx + ", user_id=" + user_id + ", name=" + name
+				+ ", phone=" + phone + ", regitid=" + regitid + "]";
 	}
+
 }

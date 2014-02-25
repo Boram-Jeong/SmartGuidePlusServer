@@ -3,8 +3,8 @@
 
 <mapper namespace="UserDao">
 	<select id="insertUser" parameterType="org.secsm.model.User">
-		INSERT INTO user(name, phone, regitid )
-									VALUES ( #{name}, #{phone}, #{regitid} );
+		INSERT INTO user(user_id, name, phone, regitid )
+									VALUES (#{user_id}, #{name}, #{phone}, #{regitid} );
 	</select>
 	
 	<select id="getUserByPhone" parameterType="String" resultType="map">

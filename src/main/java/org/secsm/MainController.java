@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -47,10 +49,18 @@ public class MainController {
 	@Autowired
 	private FileSystemResource fsResource;
 
-	
+	@ResponseBody
 	@RequestMapping(value="/user", method=RequestMethod.POST)
-	public void addUser(User user) {
+	public Object addUser(User user) {
+		user.setUser_id("test");
+
 		userDao.insertUser(user);
+		
+		Map<String, Object> _user = new HashMap<String, Object>();
+		_user.put("user_id", user.getUser_id());
+		
+		return _user;
+		
 	}
 
 	@ResponseBody
@@ -78,8 +88,19 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping(value="/guides")
 	public Object getGuide(Guide guide) {
-		System.out.println("test");
-		return guideDao.selectGuide(guide);
+		return guideDao.selectGuides(guide);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/search_res")
+	public Object getGuideByRes(Guide guide) {
+		return guideDao.selectGuideOfRes(guide);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/search")
+	public Object getSearchList(Guide guide) {
+		return guideDao.selectGuideByName(guide);
 	}
 	
 	@ResponseBody
@@ -97,12 +118,17 @@ public class MainController {
 	public void delGuide(@PathVariable String idx) {
 		guideDao.deleteGuide(idx);
 	}
+	
+	@RequestMapping(value="/download")
+	public void updateDownload(Guide guide) {
+		guideDao.updateDownload(guide);
+	}
 
 	@RequestMapping(value="/request", method=RequestMethod.POST)
 	public void addRequest(Request request) {
 		requestDao.insertRequest(request);
 	}
-
+	
 	@ResponseBody
 	@RequestMapping("requests")
 	public Object getRequests() {
@@ -139,25 +165,28 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
 	public void upload(UploadItem uploadItem, BindingResult result) {
-		System.out.println("test");
 		if (result.hasErrors()) {
 			for (ObjectError error : result.getAllErrors()) {
-				System.err.println("Error: " + error.getCode() + " - "
-						+ error.getDefaultMessage());
+				System.err.println("Error: " + error.getCode() + " - " + error.getDefaultMessage());
 			}
 		}
 
 		if (!uploadItem.getFileData().isEmpty()) {
 			String filename = uploadItem.getFileData().getOriginalFilename();
-			String fileExt = filename.substring(filename.lastIndexOf(".") + 1,
-					filename.length());
+			String dirname = filename.substring(0, filename.lastIndexOf(".")) + "\\";
+			String fileExt = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
 
 			if (fileExt.equalsIgnoreCase("json")
 					|| fileExt.equalsIgnoreCase("Zip")) {
 				byte[] bytes = uploadItem.getFileData().getBytes();
 
 				try {
-					File outFileName = new File(fsResource.getPath() + filename);
+					File dir = new File(fsResource.getPath() + dirname);
+					if(!dir.isDirectory()){
+						dir.mkdirs();
+					}
+					
+					File outFileName = new File(fsResource.getPath()+ dirname + filename);
 					FileOutputStream fileoutputStream = new FileOutputStream(
 							outFileName);
 					fileoutputStream.write(bytes);
@@ -177,6 +206,7 @@ public class MainController {
 	public boolean sendGCM(User user) {
 		
 		String regitId = userDao.getRegitidByPhone(user).get("regitid").toString();
+		System.out.println("[phone] " + user.getPhone() + " [regitid] " + regitId);
 		
 		String API = "AIzaSyBabui03rvBsTdArIpv-kJwZ4i_PgMEUPo";
 		Sender sender = new Sender(API);

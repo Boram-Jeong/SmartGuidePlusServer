@@ -26,19 +26,17 @@ public class ArgumentResolver implements WebArgumentResolver {
 
 			User user = new User();
 			
-			if(request.getParameter("user_id") != null){
-				user.setUser_id(Integer.parseInt(request.getParameter("user_id")));
+			if(request.getParameter("uidx") != null){
+				user.setUidx(Integer.parseInt(request.getParameter("uidx")));
 			}
 			
+			user.setUser_id(request.getParameter("user_id"));
 			user.setName(request.getParameter("name"));
 			user.setPhone(request.getParameter("phone"));
 			user.setRegitid(request.getParameter("regitid"));
 			
-			Map<String,String[]> map =  request.getParameterMap();
-			System.out.println(map.containsKey("name")+"");
-			
-			System.out.println(">>" + user.toString()+request.getParameter("name"));
-			
+			System.out.println(request.toString());
+			System.out.println(">>" + user.toString());
 			return user;
 		} else if (methodParam.getParameterName().equals("guide")) {
 
@@ -55,15 +53,23 @@ public class ArgumentResolver implements WebArgumentResolver {
 			guide.setName(request.getParameter("name"));
 			guide.setImage(request.getParameter("image"));
 			guide.setOs(request.getParameter("os"));
-			
-			if(request.getParameter("res") != null)
-				guide.setRes(Integer.parseInt(request.getParameter("res")));
+			guide.setDevice(request.getParameter("device"));
 			
 			guide.setDescription(request.getParameter("description"));
 			
+			if(request.getParameter("width") != null)
+				guide.setWidth(Integer.parseInt(request.getParameter("width")));
+			
+			if(request.getParameter("height") != null)
+				guide.setHeight(Integer.parseInt(request.getParameter("height")));
+			
 			if(request.getParameter("download") != null)
-				guide.setCreator(Integer.parseInt(request.getParameter("download")));
+				guide.setDownload(Integer.parseInt(request.getParameter("download")));
+			
 
+			if(request.getParameter("limit") != null){
+				guide.setLimit(Integer.parseInt(request.getParameter("limit")));
+			}
 			System.out.println(request.toString());
 			System.out.println(">>" + guide.toString());
 			return guide;

@@ -2,27 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="GuideDao">
-	<select id="selectAllGuides" resultType="map">
-		SELECT * FROM guide;
+	<select id="selectGuides" resultType="map" parameterType="org.secsm.model.Guide">
+		SELECT * FROM guide WHERE (os = #{os} AND device = #{device}) ORDER BY download DESC LIMIT #{limit}, 10;
 	</select>
 
 		<select id="selectGuideByIdx" resultType="map" parameterType="String">
 		SELECT * FROM guide WHERE idx = #{idx};
 	</select>
 	
-	<select id="selectGuideOfCondition" resultType="map" parameterType="org.secsm.model.Guide">
-		SELECT * FROM guide WHERE os = #{os} AND res = #{res};
+	<select id="selectGuideOfRes" resultType="map" parameterType="org.secsm.model.Guide">
+		SELECT * FROM guide WHERE (os = #{os} AND width = #{width} AND height = #{height});
+	</select>
+	
+	<select id="selectGuideByName" resultType="map" parameterType="org.secsm.model.Guide">
+		SELECT * FROM guide WHERE (os = #{os} AND device = #{device} AND (name LIKE #{name}));
 	</select>
 
 	<select id="insertGuide" parameterType="org.secsm.model.Guide">
-		INSERT INTO guide(creator, date, gidx, name, image, res, os, description, download )
-									VALUES ( #{creator} , #{date}, #{gidx}, #{name}, #{image}, #{res}, #{os}, #{description}, '0');
+		INSERT INTO guide(creator, date, gidx, name, image, os, description, download )
+									VALUES ( #{creator} , #{date}, #{gidx}, #{name}, #{image}, #{os}, #{description}, '0');
 	</select>
 	
 	<select id="updateGuide" parameterType="org.secsm.model.Guide">
 		UPDATE guide SET name = #{name}, image = #{image}, description = #{description} WHERE idx = #{idx};
 	</select>
 
+	<select id="updateDownload" parameterType="org.secsm.model.Guide">
+		UPDATE guide SET download = #{download} WHERE idx = #{idx};
+	</select>
+	
 	<select id="deleteGuide" parameterType="String">
 		DELETE FROM guide WHERE idx = #{idx};
 	</select>

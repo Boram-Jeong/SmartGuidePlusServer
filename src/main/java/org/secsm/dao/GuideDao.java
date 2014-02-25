@@ -25,16 +25,24 @@ public class GuideDao {
 		return sqlSessionTemplate.selectOne("GuideDao.selectGuideByIdx", idx);
 	}
 	
-	public List<Map<String, Object>> selectGuide(Guide guide){
-		return sqlSessionTemplate.selectList("GuideDao.selectGuideOfCondition", guide);
+	public List<Map<String, Object>> selectGuideByName(Guide guide){
+		return sqlSessionTemplate.selectList("GuideDao.selectGuideByName", guide);
 	}
 	
-	public List<Map<String, Object>> selectGuides(){
-		return sqlSessionTemplate.selectList("GuideDao.selectAllGuides");
+	public List<Map<String, Object>> selectGuideOfRes(Guide guide){
+		return sqlSessionTemplate.selectList("GuideDao.selectGuideOfRes", guide);
+	}
+	
+	public List<Map<String, Object>> selectGuides(Guide guide){
+		return sqlSessionTemplate.selectList("GuideDao.selectGuides", guide);
 	}
 	
 	public void updateGuide(Guide guide){
 		sqlSessionTemplate.update("GuideDao.updateGuide", guide);
+	}
+	
+	public void updateDownload(Guide guide){
+		sqlSessionTemplate.update("GuideDao.updateDownload", guide);
 	}
 	
 	public void deleteGuide(String idx){
