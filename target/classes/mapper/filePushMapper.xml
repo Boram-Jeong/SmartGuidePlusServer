@@ -3,7 +3,7 @@
 
 <mapper namespace="FilePushDao">
 	<select id="selectPushById" parameterType="String" resultType="map">
-		SELECT * FROM filepush WHERE receiver = #{user_id};
+		SELECT * FROM filepush WHERE receiver = #{user_id} order by time desc;
 	</select>
 
 	<select id="insertFilePush" parameterType="org.secsm.model.FilePush">
