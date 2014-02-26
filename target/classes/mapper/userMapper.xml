@@ -11,7 +11,7 @@
 		SELECT * FROM user WHERE phone = #{phone};
 	</select>
 	
-	<select id="getUserByID" parameterType="int" resultType="map">
+	<select id="getUserByID" parameterType="String" resultType="map">
 		SELECT * FROM user WHERE user_id = #{user_id};
 	</select>
 	

@@ -2,8 +2,8 @@ package org.secsm.model;
 
 public class FilePush {
 	int fidx;
-	int sender;
-	int receiver;
+	String sender;
+	String receiver;
 	String gidx;
 	String time;
 	
@@ -13,16 +13,17 @@ public class FilePush {
 	public void setFidx(int fidx) {
 		this.fidx = fidx;
 	}
-	public int getSender() {
+	
+	public String getSender() {
 		return sender;
 	}
-	public void setSender(int sender) {
+	public void setSender(String sender) {
 		this.sender = sender;
 	}
-	public int getReceiver() {
+	public String getReceiver() {
 		return receiver;
 	}
-	public void setReceiver(int receiver) {
+	public void setReceiver(String receiver) {
 		this.receiver = receiver;
 	}
 	public String getGidx() {
@@ -37,6 +38,7 @@ public class FilePush {
 	public void setTime(String time) {
 		this.time = time;
 	}
+	
 	@Override
 	public String toString() {
 		return "FilePush [fidx=" + fidx + ", sender=" + sender + ", receiver="

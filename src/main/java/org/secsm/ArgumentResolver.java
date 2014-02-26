@@ -100,12 +100,8 @@ public class ArgumentResolver implements WebArgumentResolver {
 			if(request.getParameter("fidx") != null)
 				filePush.setFidx(Integer.parseInt(request.getParameter("fidx")));
 
-			if(request.getParameter("sender") != null)
-				filePush.setSender(Integer.parseInt(request.getParameter("sender")));
-			
-			if(request.getParameter("receiver") != null)
-				filePush.setReceiver(Integer.parseInt(request.getParameter("receiver")));
-			
+			filePush.setSender(request.getParameter("sender"));
+			filePush.setReceiver(request.getParameter("receiver"));
 			filePush.setGidx(request.getParameter("gidx"));
 			filePush.setTime(request.getParameter("time"));
 

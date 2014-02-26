@@ -3,11 +3,15 @@
 
 <mapper namespace="FilePushDao">
 	<select id="selectPushById" parameterType="String" resultType="map">
-		SELECT * FROM filepush WHERE sender = #{user_id};
+		SELECT * FROM filepush WHERE receiver = #{user_id};
 	</select>
 
 	<select id="insertFilePush" parameterType="org.secsm.model.FilePush">
 		INSERT INTO filepush(sender, receiver, gidx, time)
 									VALUES ( #{sender}, #{receiver}, #{gidx}, #{time});
+	</select>
+	
+	<select id="delectFilePush" parameterType="String">
+	    DELETE FROM filepush WHERE fidx = #{fidx};
 	</select>
 </mapper>

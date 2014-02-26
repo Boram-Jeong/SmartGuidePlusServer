@@ -50,6 +50,12 @@ public class MainController {
 	private FileSystemResource fsResource;
 
 	@ResponseBody
+	@RequestMapping(value="/users")
+	public Object getUsers() {
+		return userDao.selectUsers();
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/user", method=RequestMethod.POST)
 	public Object addUser(User user) {
 		long id = System.currentTimeMillis();
@@ -111,9 +117,9 @@ public class MainController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/guide/{idx}", method=RequestMethod.GET)
-	public Object getGuide(@PathVariable String idx) {
-		return guideDao.selectGuideByIdx(idx);
+	@RequestMapping(value="/guide/{gidx}", method=RequestMethod.GET)
+	public Object getGuide(@PathVariable String gidx) {
+		return guideDao.selectGuideByGidx(gidx);
 	}
 	
 	@RequestMapping(value="/guide", method=RequestMethod.PUT)
@@ -161,6 +167,11 @@ public class MainController {
 	@RequestMapping(value="/push", method=RequestMethod.POST)
 	public void filePush(FilePush filePush) {
 		filePushDao.insertPush(filePush);
+	}
+	
+	@RequestMapping(value="/push/{fidx}", method=RequestMethod.DELETE)
+	public void delFilePush(@PathVariable String fidx) {
+		filePushDao.deleteFilePush(fidx);
 	}
 	
 	@ResponseBody
@@ -211,24 +222,21 @@ public class MainController {
 	
 	@RequestMapping("sendGCM")
 	public boolean sendGCM(User user) {
-		
-		String regitId = userDao.getRegitidByPhone(user).get("regitid").toString();
-		System.out.println("[phone] " + user.getPhone() + " [regitid] " + regitId);
-		
 		String API = "AIzaSyBabui03rvBsTdArIpv-kJwZ4i_PgMEUPo";
 		Sender sender = new Sender(API);
 		String ENC = "UTF-8";
+		
+		String name = userDao.selectUser(user.getUser_id()).get("name").toString();
+		String regitId = userDao.getRegitidByPhone(user).get("regitid").toString();
 
-
+		System.out.println("[name] " + name + ", [regitid] " + regitId);
 		try {
 			Message.Builder messageBuilder = new Message.Builder();
-			String sender_name = user.getName();
-			messageBuilder.addData("sender", sender_name);
-			sender_name = URLEncoder.encode(sender_name, ENC);
+			messageBuilder.addData("sender", name);
 			
 			com.google.android.gcm.server.Result result = sender.send(messageBuilder.build(), regitId, 5);
 			String messageId = result.getMessageId();
-
+			
 			return (messageId != null);
 
 		} catch (UnsupportedEncodingException e) {
@@ -236,7 +244,7 @@ public class MainController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		return false;
 	}
 }

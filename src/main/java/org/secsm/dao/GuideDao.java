@@ -21,8 +21,8 @@ public class GuideDao {
 		sqlSessionTemplate.insert("GuideDao.insertGuide", guide);
 	}
 	
-	public Map<String, Object> selectGuideByIdx(String idx){
-		return sqlSessionTemplate.selectOne("GuideDao.selectGuideByIdx", idx);
+	public Map<String, Object> selectGuideByGidx(String gidx){
+		return sqlSessionTemplate.selectOne("GuideDao.selectGuideByGidx", gidx);
 	}
 	
 	public List<Map<String, Object>> selectGuideByName(Guide guide){

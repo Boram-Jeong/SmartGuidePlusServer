@@ -6,8 +6,8 @@
 		SELECT * FROM guide WHERE (os = #{os} AND device = #{device}) ORDER BY download DESC LIMIT #{limit}, 10;
 	</select>
 
-		<select id="selectGuideByIdx" resultType="map" parameterType="String">
-		SELECT * FROM guide WHERE idx = #{idx};
+		<select id="selectGuideByGidx" resultType="map" parameterType="String">
+		SELECT * FROM guide WHERE gidx = #{gidx};
 	</select>
 	
 	<select id="selectGuideOfRes" resultType="map" parameterType="org.secsm.model.Guide">

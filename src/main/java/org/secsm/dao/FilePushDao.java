@@ -25,4 +25,7 @@ public class FilePushDao {
 		return sqlSessionTemplate.selectList("FilePushDao.selectPushById", user_id);
 	}
 
+	public void deleteFilePush(String fidx){
+		sqlSessionTemplate.delete("FilePushDao.delectFilePush", fidx);
+	}
 }
