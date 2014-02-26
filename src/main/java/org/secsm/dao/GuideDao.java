@@ -29,6 +29,10 @@ public class GuideDao {
 		return sqlSessionTemplate.selectList("GuideDao.selectGuideByName", guide);
 	}
 	
+	public List<Map<String, Object>> selectGuideByID(String user_id){
+		return sqlSessionTemplate.selectList("GuideDao.selectGuideByID", user_id);
+	}
+	
 	public List<Map<String, Object>> selectGuideOfRes(Guide guide){
 		return sqlSessionTemplate.selectList("GuideDao.selectGuideOfRes", guide);
 	}

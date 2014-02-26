@@ -17,20 +17,20 @@ public class RequestDao {
 	@Qualifier("sqlSessionTemplate")
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	public void insertRequest(Request requset){
-		sqlSessionTemplate.insert("RequestDao.insertRequset", requset);
+	public void insertRequest(Request req){
+		sqlSessionTemplate.insert("RequestDao.insertRequset", req);
 	}
 	
 	public List<Map<String, Object>> selectRequests(){
 		return sqlSessionTemplate.selectList("RequestDao.getRequest");
 	}
 	
-	public Map<String, Object> selectRequestById(String user_id){
-		return sqlSessionTemplate.selectOne("RequestDao.getRequestById", user_id);
+	public List<Map<String, Object>> selectRequestById(String user_id){
+		return sqlSessionTemplate.selectList("RequestDao.getRequestById", user_id);
 	}
 	
-	public void updateGuide(Request requset){
-		sqlSessionTemplate.update("RequestDao.updateRequest", requset);
+	public void updateGuide(Request req){
+		sqlSessionTemplate.update("RequestDao.updateRequest", req);
 	}
 	
 	public void deleteGuide(String rid){

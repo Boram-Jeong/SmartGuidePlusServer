@@ -17,6 +17,10 @@
 	<select id="selectGuideByName" resultType="map" parameterType="org.secsm.model.Guide">
 		SELECT * FROM guide WHERE (os = #{os} AND device = #{device} AND (name LIKE #{name}));
 	</select>
+	
+	<select id="selectGuideByID" resultType="map" parameterType="String">
+		SELECT * FROM guide WHERE creator = #{user_id};
+	</select>
 
 	<select id="insertGuide" parameterType="org.secsm.model.Guide">
 		INSERT INTO guide(creator, date, gidx, name, image, os, description, download )

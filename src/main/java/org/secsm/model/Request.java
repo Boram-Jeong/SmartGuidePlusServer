@@ -2,8 +2,8 @@ package org.secsm.model;
 
 public class Request {
 	int rid;
-	int user_id;
-	int gidx;
+	String user_id;
+	String gidx;
 	String title;
 	String body;
 	int accept;
@@ -13,16 +13,16 @@ public class Request {
 	public void setRid(int rid) {
 		this.rid = rid;
 	}
-	public int getUser_id() {
+	public String getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public int getGidx() {
+	public String getGidx() {
 		return gidx;
 	}
-	public void setGidx(int gidx) {
+	public void setGidx(String gidx) {
 		this.gidx = gidx;
 	}
 	public String getTitle() {
@@ -49,6 +49,4 @@ public class Request {
 				+ gidx + ", title=" + title + ", body=" + body + ", accept="
 				+ accept + "]";
 	}
-
-	
 }

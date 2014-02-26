@@ -2,7 +2,7 @@ package org.secsm.model;
 
 public class Guide {
 	int idx;
-	int creator;
+	String creator;
 	String date;
 	String gidx;
 	String name;
@@ -23,11 +23,11 @@ public class Guide {
 		this.idx = idx;
 	}
 
-	public int getCreator() {
+	public String getCreator() {
 		return creator;
 	}
 
-	public void setCreator(int creator) {
+	public void setCreator(String creator) {
 		this.creator = creator;
 	}
 
@@ -127,5 +127,4 @@ public class Guide {
 				+ ", height=" + height + ", description=" + description
 				+ ", download=" + download + ", limit=" + limit + "]";
 	}
-
 }

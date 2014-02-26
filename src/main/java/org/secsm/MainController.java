@@ -52,7 +52,8 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping(value="/user", method=RequestMethod.POST)
 	public Object addUser(User user) {
-		user.setUser_id("test");
+		long id = System.currentTimeMillis();
+		user.setUser_id("user"+id);
 
 		userDao.insertUser(user);
 		
@@ -104,6 +105,12 @@ public class MainController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/guide_by_user/{user_id}", method=RequestMethod.GET)
+	public Object getGuideByID(@PathVariable String user_id) {
+		return guideDao.selectGuideByID(user_id);
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/guide/{idx}", method=RequestMethod.GET)
 	public Object getGuide(@PathVariable String idx) {
 		return guideDao.selectGuideByIdx(idx);
@@ -125,8 +132,8 @@ public class MainController {
 	}
 
 	@RequestMapping(value="/request", method=RequestMethod.POST)
-	public void addRequest(Request request) {
-		requestDao.insertRequest(request);
+	public void addRequest(Request req) {
+		requestDao.insertRequest(req);
 	}
 	
 	@ResponseBody
@@ -142,8 +149,8 @@ public class MainController {
 	}
 
 	@RequestMapping("editRequest")
-	public void editGuide(Request request) {
-		requestDao.updateGuide(request);
+	public void editGuide(Request req) {
+		requestDao.updateGuide(req);
 	}
 
 	@RequestMapping(value="/request/{rid}", method=RequestMethod.DELETE)

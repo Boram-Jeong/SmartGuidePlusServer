@@ -45,9 +45,7 @@ public class ArgumentResolver implements WebArgumentResolver {
 			if(request.getParameter("idx") != null)
 				guide.setIdx(Integer.parseInt(request.getParameter("idx")));
 			
-			if(request.getParameter("creator") != null)
-				guide.setCreator(Integer.parseInt(request.getParameter("creator")));
-			
+			guide.setCreator(request.getParameter("creator"));
 			guide.setDate(request.getParameter("date"));
 			guide.setGidx(request.getParameter("gidx"));
 			guide.setName(request.getParameter("name"));
@@ -80,8 +78,7 @@ public class ArgumentResolver implements WebArgumentResolver {
 			if(request.getParameter("rid") != null)
 				req.setRid(Integer.parseInt(request.getParameter("rid")));
 			
-			if(request.getParameter("user_id") != null)
-				req.setUser_id(Integer.parseInt(request.getParameter("user_id")));
+			req.setUser_id(request.getParameter("user_id"));
 			
 			req.setTitle(request.getParameter("title"));
 			req.setBody(request.getParameter("body"));
@@ -90,8 +87,7 @@ public class ArgumentResolver implements WebArgumentResolver {
 				req.setAccept(Integer.parseInt(request.getParameter("accept")));
 
 			
-			if(request.getParameter("gidx") != null)
-				req.setGidx(Integer.parseInt(request.getParameter("gidx")));
+			req.setGidx(request.getParameter("gidx"));
 			
 			System.out.println(req.toString());
 			System.out.println(">>" + req.toString());
